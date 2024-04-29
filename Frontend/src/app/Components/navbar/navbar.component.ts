@@ -27,7 +27,7 @@ export class NavbarComponent {
     this.userService.logOut().subscribe({
       next:()=>{
         this.currentUser=null;
-        this.router.navigateByUrl("registration")
+        this.router.navigateByUrl("login")
       }
     });
   }
