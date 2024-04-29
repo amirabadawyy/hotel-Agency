@@ -1,0 +1,57 @@
+@if(loading){
+    <h1>loading...</h1>
+}@else{
+        <section class="breadcumb-area bg-img d-flex align-items-center justify-content-center" style="background-image: url(assets/img/bg-img/hotel2.jpg);">
+            <div class="bradcumbContent">
+            </div>
+        </section>
+        <section class="rooms-area section-padding-0-100">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-6">
+                        <div class="section-heading text-center">
+                            <div class="line- mt-2"></div>
+                            <h2 style="color: #107980;">Choose a Room</h2>
+                        </div>
+                    </div>
+                </div>
+                    <div class="container col-lg-8 ">
+                        <div class="row "  id="myTab" role="tablist">
+                            <div class="col-md-3 col-sm-12  d-flex justify-content-center mb-3 ">
+                          <button class="nav-link shadow " (click)="GetAll()"  style="color: #107980 ; font-size: 20px; font-weight: bold;background-color: #D9C5BC;">
+                            All Rooms
+                          </button>    
+                        </div>
+                        @for(option of Branches ;track option._id ){
+                            <div class="col-md-3 col-sm-12 d-flex  justify-content-center mb-3 ">
+                                <button class="nav-link shadow "  id="profile-tab" (click)="GetFiltered(option._id)" style="color: #107980; font-weight: bold; font-size: 20px;background-color: #D9C5BC; ">{{option.name}} </button>
+                            </div>
+                            } 
+                    </div>
+                    </div>
+                <div class="row mt-50">
+                    @for(room  of filteredArray; track room._id){
+                        <div class="col-12 col-md-6 col-lg-4 ">
+                            <div class="single-rooms-area wow fadeInUp " data-wow-delay="100ms">
+                                <div class="bg-thumbnail bg-img" style="background-image: url({{room.image}});"></div>
+                                <p class="price-from" >$ {{room.basePrice}} per night</p>
+                                <div  class="rooms-text " style="height: 80%;" >
+                                    <div class="line"></div>
+                                    <div style="height: min-content;">
+                                    <h4><strong>{{room.type}}</strong></h4>
+                                    <p >{{room.description}}</p>
+                                    @for(option of Branches; track option._id){
+                                        @if(option._id==room.branchId){
+                                            <h5  style="color: #000;" onmouseover="this.style.color='#D9C5BC'" onmouseout="this.style.color='#1d2d2d'" > <strong> Branch : {{option.name}}</strong></h5>
+                                        }
+                                    }
+                                </div>
+                                </div>
+                                <a style="background-color: #107980 ;border-radius: 5px;" routerLink='/rooms/{{room._id}}'  class="book-room-btn btn palatin-btn text-light">More Details</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+}
